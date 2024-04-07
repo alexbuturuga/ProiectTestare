@@ -8,11 +8,11 @@ namespace Proiect_DAW.DTOs
         [MaxLength(50, ErrorMessage = "Product Name cannot exceed 50 characters.")]
         public string? ProductName { get; set; }
 
-        [MaxLength(200, ErrorMessage = "Product Description cannot exceed 500 characters.")]
+        [MaxLength(200, ErrorMessage = "Product Description cannot exceed 200 characters.")]
         public string? ProductDescription { get; set; }
 
         [Required(ErrorMessage = "Price is required.")]
-        [Range(0, double.MaxValue, ErrorMessage = "Price must be a non-negative value.")]
+        [Range(1, double.MaxValue, ErrorMessage = "Price must be a non-negative value.")]
         public double Price { get; set; }
 
         [Required(ErrorMessage = "Cover is required.")]
