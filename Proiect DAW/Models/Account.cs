@@ -33,5 +33,14 @@ namespace Proiect_DAW.Models
         public DateTime RegisterDate { get; set; }
         public int Pinatas { get; set; }
 
+        public void CalculatePinatas(int amount, int multiplier, int bonus)
+        {
+            if (amount <= 0 || multiplier <= 0)
+            {
+                throw new ArgumentException("Amount and multiplier must be greater than zero.");
+            }
+
+            this.Pinatas = (amount / 10) * multiplier + bonus;
+        }
     }
 }

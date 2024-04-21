@@ -1,4 +1,5 @@
 ﻿using Proiect_DAW.DTOs;
+using Proiect_DAW.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace Proiect_Daw.Tests
@@ -170,6 +171,31 @@ namespace Proiect_Daw.Tests
 
             Assert.IsFalse(isValid);
             Assert.AreEqual("Username cannot exceed 50 characters.", validationResults[0].ErrorMessage);
+        }
+
+        [Test]
+        public void CalculatePinatas_Should_Calculate_Correctly_With_Bonus()
+        {
+            var account = new Account();
+            account.CalculatePinatas(100, 2, 5); // 100 unități, coeficient 2, bonus 5
+            Assert.AreEqual(25, account.Pinatas); // Așteptăm 25 de pinatas ((100 / 10 * 2) + 5)
+        }
+
+        [Test]
+        public void CalculatePinatas_Should_Throw_Exception_For_Invalid_Arguments()
+        {
+            var account = new Account();
+            // Verificăm dacă aruncă o excepție când valori sunt nevalide
+            Assert.Throws<ArgumentException>(() => account.CalculatePinatas(0, 5, 2));
+            Assert.Throws<ArgumentException>(() => account.CalculatePinatas(50, 0, 1));
+        }
+
+        [Test]
+        public void CalculatePinatas_Should_Handle_Negative_Bonus()
+        {
+            var account = new Account();
+            account.CalculatePinatas(100, 2, -5); // 100 unități, coeficient 2, bonus negativ -5
+            Assert.AreEqual(15, account.Pinatas); // Așteptăm 15 pinatas ((100 / 10 * 2) - 5)
         }
     }
 }
