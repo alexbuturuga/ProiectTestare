@@ -197,5 +197,13 @@ namespace Proiect_Daw.Tests
             account.CalculatePinatas(100, 2, -5); // 100 unități, coeficient 2, bonus negativ -5
             Assert.AreEqual(15, account.Pinatas); // Așteptăm 15 pinatas ((100 / 10 * 2) - 5)
         }
+
+        [Test]
+        public void CalculatePinatas_Condition_Test_Multiplier_Zero()
+        {
+            var account = new Account();
+            var ex = Assert.Throws<ArgumentException>(() => account.CalculatePinatas(100, 0, 5));
+            Assert.That(ex.Message, Is.EqualTo("Amount and multiplier must be greater than zero."));
+        }
     }
 }
