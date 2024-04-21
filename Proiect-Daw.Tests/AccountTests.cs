@@ -205,5 +205,37 @@ namespace Proiect_Daw.Tests
             var ex = Assert.Throws<ArgumentException>(() => account.CalculatePinatas(100, 0, 5));
             Assert.That(ex.Message, Is.EqualTo("Amount and multiplier must be greater than zero."));
         }
+
+        //valori de frontiera
+
+        [Test]
+        public void CalculatePinatas_WithMultiplier1_Amount1()
+        {
+            var account = new Account();
+            account.CalculatePinatas(1, 1, 0);
+            Assert.AreEqual(0, account.Pinatas); // se asteapta pinatas 0
+        }
+        [Test]
+        public void CalculatePinatas_WithMultiplier1_AmountGreater()
+        {
+            var account = new Account();
+            account.CalculatePinatas(9, 1, 1);
+            Assert.AreEqual(1, account.Pinatas); // se asteapta pinatas 1
+        }
+        [Test]
+        public void CalculatePinatas_Bonus0()
+        {
+            var account = new Account();
+            account.CalculatePinatas(10, 2, 0);
+            Assert.AreEqual(2, account.Pinatas); // se asteapta pinatas 2
+        }
+        [Test]
+        public void CalculatePinatas_Multiplier0_Amount0()
+        {
+            var account = new Account();
+            var ex = Assert.Throws<ArgumentException>(() => account.CalculatePinatas(0, 0, 5));
+            Assert.That(ex.Message, Is.EqualTo("Amount and multiplier must be greater than zero."));
+        }
+
     }
 }

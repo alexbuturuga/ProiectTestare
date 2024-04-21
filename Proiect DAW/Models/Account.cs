@@ -31,6 +31,7 @@ namespace Proiect_DAW.Models
         public string PhoneNumber { get; set; }
         [Required]
         public DateTime RegisterDate { get; set; }
+
         public int Pinatas { get; set; }
 
         public void CalculatePinatas(int amount, int multiplier, int bonus)
