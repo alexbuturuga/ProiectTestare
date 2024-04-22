@@ -41,7 +41,21 @@ namespace Proiect_DAW.Models
                 throw new ArgumentException("Amount and multiplier must be greater than zero.");
             }
 
-            this.Pinatas = (amount / 10) * multiplier + bonus;
+            int totalPinatas = 0;
+
+            for (int i = 1; i <= amount; i++)
+            {
+                if (i % 10 == 0) // Every 10th piñata gets a bonus
+                {
+                    totalPinatas += multiplier + bonus;
+                }
+                else
+                {
+                    totalPinatas += multiplier;
+                }
+            }
+
+            Pinatas = totalPinatas;
         }
     }
 }
