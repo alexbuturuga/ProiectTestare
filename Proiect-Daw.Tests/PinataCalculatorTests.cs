@@ -1,4 +1,5 @@
-﻿using Proiect_DAW.Models;
+﻿using System.Runtime.InteropServices;
+using Proiect_DAW.Models;
 using Xunit;
 using XAssert = Xunit.Assert;
 
@@ -98,5 +99,48 @@ public class PinataCalculatorTests
 
         // Assert
         XAssert.Equal(1, _calculator.Pinatas);
+    }
+    
+    [Xunit.Fact]
+    public void CalculatePinatas_StatementCoverage()
+    {
+        _calculator.CalculatePinatas(10, 2, 5);
+        XAssert.Equal(25, _calculator.Pinatas);
+    }
+
+    [Xunit.Theory]
+    [InlineData(0, 5, 2, typeof(ArgumentException))] // Test for invalid amount
+    [InlineData(20, 5, 2, 104)] // Test for tenth pinata
+    public void CalculatePinatas_DecisionCoverage(int amount, int multiplier, int bonus, object expected)
+    {
+        switch (expected)
+        {
+            case int expectedPinatas:
+                _calculator.CalculatePinatas(amount, multiplier, bonus);
+                XAssert.Equal(expectedPinatas, _calculator.Pinatas);
+                break;
+            case Type exceptionType:
+                XAssert.Throws(exceptionType, () => _calculator.CalculatePinatas(amount, multiplier, bonus));
+                break;
+        }
+    }
+    
+    [Xunit.Theory]
+    [InlineData(0, 0, 1, typeof(ArgumentException))] // Test for invalid amount and multiplier
+    [InlineData(0, 5, 2, typeof(ArgumentException))] // Test for invalid amount
+    [InlineData(2, 0, 2, typeof(ArgumentException))] // Test for invalid multiplier
+    [InlineData(2, 5, 2, 10)] // Test for valid amount and multiplier
+    public void CalculatePinatas_ConditionCoverage(int amount, int multiplier, int bonus, object expected)
+    {
+        switch (expected)
+        {
+            case int expectedPinatas:
+                _calculator.CalculatePinatas(amount, multiplier, bonus);
+                XAssert.Equal(expectedPinatas, _calculator.Pinatas);
+                break;
+            case Type exceptionType:
+                XAssert.Throws(exceptionType, () => _calculator.CalculatePinatas(amount, multiplier, bonus));
+                break;
+        }
     }
 }
