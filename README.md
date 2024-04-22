@@ -15,6 +15,9 @@
 > - Promotion
 > - Receipt
 > - ReceiptProduct
+>
+> ## Functia de testare
+> - CalculatePinatas(int *amount*, int *multiplier*, int *bonus*)
 
 > # Presentation
 >
@@ -24,4 +27,4 @@
 
 > # Demo Video
 > Aici va fi un link la video, cand va fi gata
-> [link video](https://github.com/alexbuturuga/ProiectTestare "Proiectul de github momentan")
+> [link video](https://youtu.be/HjC5ZXUk5Xc "Proiectul de github momentan")
