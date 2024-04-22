@@ -19,7 +19,7 @@
 > # Presentation
 >
 > Aici va fi un link la prezentarea, atunci cand aceasta va exista
-> [link prezentare](https://github.com/alexbuturuga/ProiectTestare "Proiectul de github momentan")
+> [link prezentare](https://docs.google.com/presentation/d/1z1WZ1Qe5LSVPfK5UaUdp9mSqLVdf_JXGJcAfWdEP_EA/edit?usp=sharing "Proiectul de github momentan")
 
 
 > # Demo Video
