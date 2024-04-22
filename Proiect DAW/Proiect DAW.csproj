@@ -24,4 +24,26 @@
     <PackageReference Include="xunit" Version="2.7.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="dotnet-tools.json" />
+    <None Remove="tests\**" />
+    <None Remove="StrykerOutput\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="tests\PinataCalculatorTests.cs" />
+    <Compile Remove="tests\**" />
+    <Compile Remove="StrykerOutput\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="tests\**" />
+    <EmbeddedResource Remove="StrykerOutput\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="tests\**" />
+    <Content Remove="StrykerOutput\**" />
+  </ItemGroup>
+
 </Project>

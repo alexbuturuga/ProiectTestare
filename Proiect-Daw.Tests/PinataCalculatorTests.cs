@@ -45,7 +45,9 @@ public class PinataCalculatorTests
     public void CalculatePinatas_AmountInvalidValues(int amount, int multiplier, int bonus)
     {
         // Act & Assert
-        XAssert.Throws<ArgumentException>(() => _calculator.CalculatePinatas(amount, multiplier, bonus));
+        var exception = XAssert.Throws<ArgumentException>(() => _calculator.CalculatePinatas(amount, multiplier, bonus));
+        XAssert.Equal("Amount and multiplier must be greater than zero.", exception.Message);
+
     }
 
     [Xunit.Theory]
@@ -81,7 +83,9 @@ public class PinataCalculatorTests
     public void CalculatePinatas_MultiplierInvalidValues(int amount, int multiplier, int bonus)
     {
         // Act & Assert
-        XAssert.Throws<ArgumentException>(() => _calculator.CalculatePinatas(amount, multiplier, bonus));
+        var exception = XAssert.Throws<ArgumentException>(() => _calculator.CalculatePinatas(amount, multiplier, bonus));
+        XAssert.Equal("Amount and multiplier must be greater than zero.", exception.Message);
+
     }
 
     [Xunit.Theory]
