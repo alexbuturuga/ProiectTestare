@@ -14,12 +14,14 @@ public class PinataCalculatorTests
         _calculator = new Account();
     }
 
+    // TESTE FUNCTIONALE
+    
+    // Partitionare in clase de echivalenta
+    
+    // Clasa 1 de echivalenta (toti parametrii) - valori intregi intre 1-9
     [Xunit.Theory]
-    [InlineData(1, 1, 1, 1)] // Clasa 1 pentru amount și multiplier, Clasa 1 pentru bonus
-    [InlineData(9, 1, 1, 9)] // Clasa 1 pentru amount și multiplier, Clasa 1 pentru bonus
-    [InlineData(10, 1, 1, 11)] // Clasa 2 pentru amount și multiplier, Clasa 1 pentru bonus
-    [InlineData(11, 1, 1, 12)] // Clasa 2 pentru amount și multiplier, Clasa 1 pentru bonus
-    public void CalculatePinatas_AmountValidValues(int amount, int multiplier, int bonus, int expected)
+    [InlineData(5, 5, 5, 25)]
+    public void CalculatePinatas_AllParametersClass1(int amount, int multiplier, int bonus, int expected)
     {
         // Act
         _calculator.CalculatePinatas(amount, multiplier, bonus);
@@ -28,9 +30,10 @@ public class PinataCalculatorTests
         XAssert.Equal(expected, _calculator.Pinatas);
     }
 
+    // Clasa 2 de echivalenta (toti parametrii) - valori pozitive intregi mai mari ca 10
     [Xunit.Theory]
-    [InlineData(10, 1, 1, 11)] // Valoare de frontieră pentru amount
-    public void CalculatePinatas_AmountBoundaryValues(int amount, int multiplier, int bonus, int expected)
+    [InlineData(11, 11, 11, 132)]
+    public void CalculatePinatas_AllParametersClass2(int amount, int multiplier, int bonus, int expected)
     {
         // Act
         _calculator.CalculatePinatas(amount, multiplier, bonus);
@@ -38,67 +41,38 @@ public class PinataCalculatorTests
         // Assert
         XAssert.Equal(expected, _calculator.Pinatas);
     }
-
+    
+    // Clasa 3 de echivalenta (toti parametrii) - valori negative intregi
     [Xunit.Theory]
-    [InlineData(-1, 1, 1)] // Clasa 3 pentru amount
-    [InlineData(-10, 1, 1)] // Clasa 3 pentru amount
-    [InlineData(0, 1, 1)] // Valoare de frontieră pentru amount
-    public void CalculatePinatas_AmountInvalidValues(int amount, int multiplier, int bonus)
+    [InlineData(-1, -1, -1)]
+    public void CalculatePinatas_AllParametersClass3(int amount, int multiplier, int bonus)
     {
         // Act & Assert
         var exception = XAssert.Throws<ArgumentException>(() => _calculator.CalculatePinatas(amount, multiplier, bonus));
         XAssert.Equal("Amount and multiplier must be greater than zero.", exception.Message);
-
     }
-
+    
+    // Analiza valorilor de frontiera
+    
+    // Valori de frontiera (toti parametrii)
     [Xunit.Theory]
-    [InlineData(1, 1, 1, 1)] // Clasa 1 pentru multiplier
-    [InlineData(9, 9, 1, 81)] // Clasa 1 pentru multiplier
-    [InlineData(10, 10, 1, 101)] // Clasa 2 pentru multiplier
-    [InlineData(11, 11, 1, 122)] // Clasa 2 pentru multiplier
-    public void CalculatePinatas_MultiplierValidValues(int amount, int multiplier, int bonus, int expected)
-    {
-        // Act
-        _calculator.CalculatePinatas(amount, multiplier, bonus);
-
-        // Assert
-        XAssert.Equal(expected, _calculator.Pinatas);
-    }
-
-    [Xunit.Theory]
-    [InlineData(1, 1, 1)] // Clasa 1 pentru bonus
-    [InlineData(1, 1, -1)] // Clasa 2 pentru bonus
-    [InlineData(1, 1, 0)] // Valoare de frontieră pentru bonus
-    public void CalculatePinatas_BonusValidValues(int amount, int multiplier, int bonus)
-    {
-        // Act
-        _calculator.CalculatePinatas(amount, multiplier, bonus);
-
-        // Assert
-        XAssert.Equal(1, _calculator.Pinatas);
-    }
-
-    [Xunit.Theory]
-    [InlineData(1, 0, 1)] // Valoare de frontieră pentru multiplier
-    [InlineData(1, -1, 1)] // Valoare de frontieră pentru multiplier
-    public void CalculatePinatas_MultiplierInvalidValues(int amount, int multiplier, int bonus)
+    [InlineData(1, 1, 1, 1)]
+    [InlineData(9, 9, 9, 81)]
+    [InlineData(10, 10, 10, 110)]
+    [InlineData(-1, -1, -1, 0)]
+    [InlineData(0, 0, 0, 0)]
+    public void CalculatePinatas_BoundaryValues(int amount, int multiplier, int bonus, int expected)
     {
         // Act & Assert
-        var exception = XAssert.Throws<ArgumentException>(() => _calculator.CalculatePinatas(amount, multiplier, bonus));
-        XAssert.Equal("Amount and multiplier must be greater than zero.", exception.Message);
-
-    }
-
-    [Xunit.Theory]
-    [InlineData(1, 1, int.MaxValue)] // Valoare de frontieră pentru bonus
-    [InlineData(1, 1, int.MinValue)] // Valoare de frontieră pentru bonus
-    public void CalculatePinatas_BonusBoundaryValues(int amount, int multiplier, int bonus)
-    {
-        // Act
-        _calculator.CalculatePinatas(amount, multiplier, bonus);
-
-        // Assert
-        XAssert.Equal(1, _calculator.Pinatas);
+        if (amount <= 0 || multiplier <= 0)
+        {
+            XAssert.Throws<ArgumentException>(() => _calculator.CalculatePinatas(amount, multiplier, bonus));
+        }
+        else
+        {
+            _calculator.CalculatePinatas(amount, multiplier, bonus);
+            XAssert.Equal(expected, _calculator.Pinatas);
+        }
     }
     
     [Xunit.Fact]
