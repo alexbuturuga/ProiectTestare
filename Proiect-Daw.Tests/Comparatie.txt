@@ -1,0 +1,1 @@
+Programul generat de AI a avut 2 erori de compilare si a facut doar 3 teste. Noi am acoperit majoritatea cazurilor si codul a functionat cum trebuie. 
